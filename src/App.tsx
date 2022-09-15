@@ -1,6 +1,6 @@
 import { env } from "process";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
-import ToDoList from "./ToDoList";
+import ToDoList from "./components/ToDoList";
 import { darkTheme, lightTheme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`
