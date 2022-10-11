@@ -3,6 +3,18 @@ import React from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { IToDo, toDoState, Categories, categoriesState } from "../atoms";
 
+const ButtonDiv = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const ClickButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 2px;
+  height: 20px;
+`;
+
 const ToDo = ({ text, category, id }: IToDo) => {
   const setToDos = useSetRecoilState(toDoState);
   const categories = useRecoilValue(categoriesState);
@@ -29,40 +41,25 @@ const ToDo = ({ text, category, id }: IToDo) => {
   return (
     <ul>
       <h1>{text}</h1>
-      <div>
+      <ButtonDiv>
         <>
-          {category !== Categories.TO_DO && (
-            <button name={Categories.TO_DO} onClick={changeCategory}>
-              할 일
-            </button>
-          )}
-          {category !== Categories.DOING && (
-            <button name={Categories.DOING} onClick={changeCategory}>
-              진행 중
-            </button>
-          )}
-          {category !== Categories.DONE && (
-            <button name={Categories.DONE} onClick={changeCategory}>
-              끝낸 일
-            </button>
-          )}
           {categories?.map(
             (addtionCategory) =>
               addtionCategory.title != category && (
-                <button
+                <ClickButton
                   name={addtionCategory.title}
                   onClick={changeCategory}
                   key={addtionCategory.id}
                 >
                   {addtionCategory.title}
-                </button>
+                </ClickButton>
               )
           )}
-          <button name="delete" onClick={changeCategory}>
+          <ClickButton name="delete" onClick={changeCategory}>
             삭제하기
-          </button>
+          </ClickButton>
         </>
-      </div>
+      </ButtonDiv>
     </ul>
   );
 };

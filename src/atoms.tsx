@@ -20,7 +20,6 @@ export interface IAdditionCategory {
 
 const { persistAtom } = recoilPersist();
 
-/** 기본 카테고리 state */
 export const categoryState = atom<Categories>({
   key: "category",
   default: Categories.TO_DO,
@@ -29,7 +28,11 @@ export const categoryState = atom<Categories>({
 /** 로컬스토리지용 카테고리 State */
 export const categoriesState = atom<IAdditionCategory[]>({
   key: "categories",
-  default: [],
+  default: [
+    { title: Categories.TO_DO, id: Date.now() },
+    { title: Categories.DOING, id: Date.now() + 1 },
+    { title: Categories.DONE, id: Date.now() + 2 },
+  ],
   effects_UNSTABLE: [persistAtom],
 });
 
